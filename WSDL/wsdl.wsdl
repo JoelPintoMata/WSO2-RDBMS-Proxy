@@ -1,0 +1,453 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://ws.wso2.org/dataservice" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns0="http://ws.wso2.org/dataservice/samples/rdbms_sample_yenlo" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://ws.wso2.org/dataservice/samples/rdbms_sample_yenlo">
+   <wsdl:types>
+      <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://ws.wso2.org/dataservice/samples/rdbms_sample_yenlo">
+         <xs:element name="productsByName">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="NAME" nillable="true" type="xs:string"></xs:element>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="products" type="ns0:products"></xs:element>
+         <xs:complexType name="products">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="product" type="ns0:product"></xs:element>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="product">
+            <xs:sequence>
+               <xs:element name="ID" nillable="true" type="xs:integer"></xs:element>
+               <xs:element name="NAME" nillable="true" type="xs:string"></xs:element>
+               <xs:element name="DESCRIPTION" nillable="true" type="xs:string"></xs:element>
+               <xs:element name="STOCK" nillable="true" type="xs:integer"></xs:element>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:element name="deleteAllProducts">
+            <xs:complexType>
+               <xs:sequence></xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="end_boxcar">
+            <xs:complexType>
+               <xs:sequence></xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="begin_boxcar">
+            <xs:complexType>
+               <xs:sequence></xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="updateProductStock">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="STOCK" nillable="true" type="xs:int"></xs:element>
+                  <xs:element name="ID" nillable="true" type="xs:int"></xs:element>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="products2">
+            <xs:complexType>
+               <xs:sequence></xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="insertProduct">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="NAME" nillable="true" type="xs:string"></xs:element>
+                  <xs:element name="DESCRIPTION" nillable="true" type="xs:string"></xs:element>
+                  <xs:element name="STOCK" nillable="true" type="xs:int"></xs:element>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="abort_boxcar">
+            <xs:complexType>
+               <xs:sequence></xs:sequence>
+            </xs:complexType>
+         </xs:element>
+      </xs:schema>
+      <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://ws.wso2.org/dataservice">
+         <xs:element name="DataServiceFault">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="current_params" type="xs:string"></xs:element>
+                  <xs:element name="current_request_name" type="xs:string"></xs:element>
+                  <xs:element name="nested_exception" type="xs:string"></xs:element>
+                  <xs:element name="source_data_service">
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="location" type="xs:string"></xs:element>
+                           <xs:element name="default_namespace" type="xs:string"></xs:element>
+                           <xs:element name="description" type="xs:string"></xs:element>
+                           <xs:element name="data_service_name" type="xs:string"></xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="ds_code" type="xs:string"></xs:element>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="REQUEST_STATUS" type="xs:string"></xs:element>
+         <xs:element name="DATA_SERVICE_RESPONSE">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:any minOccurs="0"></xs:any>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+      </xs:schema>
+   </wsdl:types>
+   <wsdl:message name="productsRequest">
+      <wsdl:part name="parameters" element="ns0:products2"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="productsResponse">
+      <wsdl:part name="parameters" element="ns0:products"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="DataServiceFault">
+      <wsdl:part name="parameters" element="ns1:DataServiceFault"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="updateProductStockRequest">
+      <wsdl:part name="parameters" element="ns0:updateProductStock"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="updateProductStockResponse">
+      <wsdl:part name="parameters" element="ns1:REQUEST_STATUS"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="deleteAllProductsRequest">
+      <wsdl:part name="parameters" element="ns0:deleteAllProducts"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="begin_boxcarRequest">
+      <wsdl:part name="parameters" element="ns0:begin_boxcar"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="begin_boxcarResponse">
+      <wsdl:part name="parameters" element="ns1:DATA_SERVICE_RESPONSE"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="end_boxcarRequest">
+      <wsdl:part name="parameters" element="ns0:end_boxcar"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="end_boxcarResponse">
+      <wsdl:part name="parameters" element="ns1:DATA_SERVICE_RESPONSE"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="productsByNameRequest">
+      <wsdl:part name="parameters" element="ns0:productsByName"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="productsByNameResponse">
+      <wsdl:part name="parameters" element="ns0:products"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="insertProductRequest">
+      <wsdl:part name="parameters" element="ns0:insertProduct"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="insertProductResponse">
+      <wsdl:part name="parameters" element="ns1:REQUEST_STATUS"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="abort_boxcarRequest">
+      <wsdl:part name="parameters" element="ns0:abort_boxcar"></wsdl:part>
+   </wsdl:message>
+   <wsdl:portType name="RDBMS_Proxy_YenloPortType">
+      <wsdl:operation name="products">
+         <wsdl:documentation>queries the database for all the products</wsdl:documentation>
+         <wsdl:input message="ns0:productsRequest" wsaw:Action="urn:products"></wsdl:input>
+         <wsdl:output message="ns0:productsResponse" wsaw:Action="urn:productsResponse"></wsdl:output>
+         <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:productsDataServiceFault"></wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="updateProductStock">
+         <wsdl:documentation>Updates the Stock value of the Product with the given ID</wsdl:documentation>
+         <wsdl:input message="ns0:updateProductStockRequest" wsaw:Action="urn:updateProductStock"></wsdl:input>
+         <wsdl:output message="ns0:updateProductStockResponse" wsaw:Action="urn:updateProductStockResponse"></wsdl:output>
+         <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:updateProductStockDataServiceFault"></wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="deleteAllProducts">
+         <wsdl:documentation>Deletes all database Products                                     </wsdl:documentation>
+         <wsdl:input message="ns0:deleteAllProductsRequest" wsaw:Action="urn:deleteAllProducts"></wsdl:input>
+      </wsdl:operation>
+      <wsdl:operation name="begin_boxcar">
+         <wsdl:documentation>Control operation for beginning a boxcarring session</wsdl:documentation>
+         <wsdl:input message="ns0:begin_boxcarRequest" wsaw:Action="urn:begin_boxcar"></wsdl:input>
+         <wsdl:output message="ns0:begin_boxcarResponse" wsaw:Action="urn:begin_boxcarResponse"></wsdl:output>
+         <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:begin_boxcarDataServiceFault"></wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="end_boxcar">
+         <wsdl:documentation>Control operation for ending a boxcarring session</wsdl:documentation>
+         <wsdl:input message="ns0:end_boxcarRequest" wsaw:Action="urn:end_boxcar"></wsdl:input>
+         <wsdl:output message="ns0:end_boxcarResponse" wsaw:Action="urn:end_boxcarResponse"></wsdl:output>
+         <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:end_boxcarDataServiceFault"></wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="productsByName">
+         <wsdl:documentation>queries the database for all with a given name                                                                         </wsdl:documentation>
+         <wsdl:input message="ns0:productsByNameRequest" wsaw:Action="urn:productsByName"></wsdl:input>
+         <wsdl:output message="ns0:productsByNameResponse" wsaw:Action="urn:productsByNameResponse"></wsdl:output>
+         <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:productsByNameDataServiceFault"></wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="insertProduct">
+         <wsdl:documentation>Inserts a new product in the database</wsdl:documentation>
+         <wsdl:input message="ns0:insertProductRequest" wsaw:Action="urn:insertProduct"></wsdl:input>
+         <wsdl:output message="ns0:insertProductResponse" wsaw:Action="urn:insertProductResponse"></wsdl:output>
+         <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:insertProductDataServiceFault"></wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="abort_boxcar">
+         <wsdl:documentation>Control operation for aborting a boxcarring session</wsdl:documentation>
+         <wsdl:input message="ns0:abort_boxcarRequest" wsaw:Action="urn:abort_boxcar"></wsdl:input>
+      </wsdl:operation>
+   </wsdl:portType>
+   <wsdl:binding name="RDBMS_Proxy_YenloSoap11Binding" type="ns0:RDBMS_Proxy_YenloPortType">
+      <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"></soap:binding>
+      <wsdl:operation name="products">
+         <soap:operation soapAction="urn:products" style="document"></soap:operation>
+         <wsdl:input>
+            <soap:body use="literal"></soap:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"></soap:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap:fault use="literal" name="DataServiceFault"></soap:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="updateProductStock">
+         <soap:operation soapAction="urn:updateProductStock" style="document"></soap:operation>
+         <wsdl:input>
+            <soap:body use="literal"></soap:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"></soap:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap:fault use="literal" name="DataServiceFault"></soap:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="deleteAllProducts">
+         <soap:operation soapAction="urn:deleteAllProducts" style="document"></soap:operation>
+         <wsdl:input>
+            <soap:body use="literal"></soap:body>
+         </wsdl:input>
+      </wsdl:operation>
+      <wsdl:operation name="begin_boxcar">
+         <soap:operation soapAction="urn:begin_boxcar" style="document"></soap:operation>
+         <wsdl:input>
+            <soap:body use="literal"></soap:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"></soap:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap:fault use="literal" name="DataServiceFault"></soap:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="insertProduct">
+         <soap:operation soapAction="urn:insertProduct" style="document"></soap:operation>
+         <wsdl:input>
+            <soap:body use="literal"></soap:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"></soap:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap:fault use="literal" name="DataServiceFault"></soap:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="productsByName">
+         <soap:operation soapAction="urn:productsByName" style="document"></soap:operation>
+         <wsdl:input>
+            <soap:body use="literal"></soap:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"></soap:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap:fault use="literal" name="DataServiceFault"></soap:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="end_boxcar">
+         <soap:operation soapAction="urn:end_boxcar" style="document"></soap:operation>
+         <wsdl:input>
+            <soap:body use="literal"></soap:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"></soap:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap:fault use="literal" name="DataServiceFault"></soap:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="abort_boxcar">
+         <soap:operation soapAction="urn:abort_boxcar" style="document"></soap:operation>
+         <wsdl:input>
+            <soap:body use="literal"></soap:body>
+         </wsdl:input>
+      </wsdl:operation>
+   </wsdl:binding>
+   <wsdl:binding name="RDBMS_Proxy_YenloSoap12Binding" type="ns0:RDBMS_Proxy_YenloPortType">
+      <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"></soap12:binding>
+      <wsdl:operation name="products">
+         <soap12:operation soapAction="urn:products" style="document"></soap12:operation>
+         <wsdl:input>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap12:fault use="literal" name="DataServiceFault"></soap12:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="updateProductStock">
+         <soap12:operation soapAction="urn:updateProductStock" style="document"></soap12:operation>
+         <wsdl:input>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap12:fault use="literal" name="DataServiceFault"></soap12:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="deleteAllProducts">
+         <soap12:operation soapAction="urn:deleteAllProducts" style="document"></soap12:operation>
+         <wsdl:input>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:input>
+      </wsdl:operation>
+      <wsdl:operation name="begin_boxcar">
+         <soap12:operation soapAction="urn:begin_boxcar" style="document"></soap12:operation>
+         <wsdl:input>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap12:fault use="literal" name="DataServiceFault"></soap12:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="insertProduct">
+         <soap12:operation soapAction="urn:insertProduct" style="document"></soap12:operation>
+         <wsdl:input>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap12:fault use="literal" name="DataServiceFault"></soap12:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="productsByName">
+         <soap12:operation soapAction="urn:productsByName" style="document"></soap12:operation>
+         <wsdl:input>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap12:fault use="literal" name="DataServiceFault"></soap12:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="end_boxcar">
+         <soap12:operation soapAction="urn:end_boxcar" style="document"></soap12:operation>
+         <wsdl:input>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap12:fault use="literal" name="DataServiceFault"></soap12:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="abort_boxcar">
+         <soap12:operation soapAction="urn:abort_boxcar" style="document"></soap12:operation>
+         <wsdl:input>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:input>
+      </wsdl:operation>
+   </wsdl:binding>
+   <wsdl:binding name="RDBMS_Proxy_YenloHttpBinding" type="ns0:RDBMS_Proxy_YenloPortType">
+      <http:binding verb="POST"></http:binding>
+      <wsdl:operation name="products">
+         <http:operation location="products"></http:operation>
+         <wsdl:input>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:input>
+         <wsdl:output>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="updateProductStock">
+         <http:operation location="updateProductStock"></http:operation>
+         <wsdl:input>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:input>
+         <wsdl:output>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="deleteAllProducts">
+         <http:operation location="deleteAllProducts"></http:operation>
+         <wsdl:input>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:input>
+      </wsdl:operation>
+      <wsdl:operation name="begin_boxcar">
+         <http:operation location="begin_boxcar"></http:operation>
+         <wsdl:input>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:input>
+         <wsdl:output>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="insertProduct">
+         <http:operation location="insertProduct"></http:operation>
+         <wsdl:input>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:input>
+         <wsdl:output>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="productsByName">
+         <http:operation location="productsByName"></http:operation>
+         <wsdl:input>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:input>
+         <wsdl:output>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="end_boxcar">
+         <http:operation location="end_boxcar"></http:operation>
+         <wsdl:input>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:input>
+         <wsdl:output>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="abort_boxcar">
+         <http:operation location="abort_boxcar"></http:operation>
+         <wsdl:input>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:input>
+      </wsdl:operation>
+   </wsdl:binding>
+   <wsdl:service name="RDBMS_Proxy_Yenlo">
+      <wsdl:port name="RDBMS_Proxy_YenloHttpSoap11Endpoint" binding="ns0:RDBMS_Proxy_YenloSoap11Binding">
+         <soap:address location="http://Joels-MacBook-Air.local:8283/services/RDBMS_Proxy_Yenlo.RDBMS_Proxy_YenloHttpSoap11Endpoint"></soap:address>
+      </wsdl:port>
+      <wsdl:port name="RDBMS_Proxy_YenloHttpsSoap11Endpoint" binding="ns0:RDBMS_Proxy_YenloSoap11Binding">
+         <soap:address location="https://Joels-MacBook-Air.local:8246/services/RDBMS_Proxy_Yenlo.RDBMS_Proxy_YenloHttpsSoap11Endpoint"></soap:address>
+      </wsdl:port>
+      <wsdl:port name="RDBMS_Proxy_YenloHttpSoap12Endpoint" binding="ns0:RDBMS_Proxy_YenloSoap12Binding">
+         <soap12:address location="http://Joels-MacBook-Air.local:8283/services/RDBMS_Proxy_Yenlo.RDBMS_Proxy_YenloHttpSoap12Endpoint"></soap12:address>
+      </wsdl:port>
+      <wsdl:port name="RDBMS_Proxy_YenloHttpsSoap12Endpoint" binding="ns0:RDBMS_Proxy_YenloSoap12Binding">
+         <soap12:address location="https://Joels-MacBook-Air.local:8246/services/RDBMS_Proxy_Yenlo.RDBMS_Proxy_YenloHttpsSoap12Endpoint"></soap12:address>
+      </wsdl:port>
+      <wsdl:port name="RDBMS_Proxy_YenloHttpEndpoint" binding="ns0:RDBMS_Proxy_YenloHttpBinding">
+         <http:address location="http://Joels-MacBook-Air.local:8283/services/RDBMS_Proxy_Yenlo.RDBMS_Proxy_YenloHttpEndpoint"></http:address>
+      </wsdl:port>
+      <wsdl:port name="RDBMS_Proxy_YenloHttpsEndpoint" binding="ns0:RDBMS_Proxy_YenloHttpBinding">
+         <http:address location="https://Joels-MacBook-Air.local:8246/services/RDBMS_Proxy_Yenlo.RDBMS_Proxy_YenloHttpsEndpoint"></http:address>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>
